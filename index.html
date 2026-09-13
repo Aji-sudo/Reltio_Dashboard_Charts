@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Run Summary Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: transparent; }
+    #status { padding: 8px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div id="status">Loading run summaries…</div>
+  <div id="chartScroll" style="overflow-x: auto; width: 100%;">
+    <div id="chartInner" style="position: relative; height: 420px;">
+      <canvas id="runSummaryChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // -----------------------------------------------------------------
+    // 1. CONFIGURATION — edit these for your tenant
+    // -----------------------------------------------------------------
+    //
+    // *** SECURITY WARNING ***
+    // This page mints its own Reltio OAuth token client-side using
+    // clientId/clientSecret below. Because this page is served as plain
+    // static HTML/JS (e.g. on GitHub Pages), ANYONE who views the page
+    // source can read these values directly -- and unlike a short-lived
+    // bearer token, a client secret can be used to mint fresh tokens
+    // indefinitely. Treat this as a temporary/testing setup only. Before
+    // real use, move the token-minting step to a small server-side
+    // function (Cloud Function, Netlify Function, etc.) that holds the
+    // secret and only ever returns a short-lived token or the final
+    // data to the browser -- never the secret itself.
+    const CONFIG = {
+      // Reltio environment + tenant, e.g. "test-usg", "prod-us"
+      reltioEnvironment: 'test-usg',
+      reltioTenantId: 'LZJ55evM3FBfKcN',
+
+      // OAuth client credentials (see security warning above)
+      clientId: 'prime_test_2',
+      clientSecret: 'rK7#3NRoV0oclB1Cl2EajeVuICqGKBvi',
+      authUrl: 'https://auth.reltio.com/oauth/token',
+
+      // RunSummary entity type path (must match RUN_SUMMARY_ENTITY_TYPE
+      // in the Python ingestion script)
+      entityType: 'configuration/entityTypes/RunSummary',
+
+      // How many recent runs to fetch/show on the chart
+      maxRuns: 20,
+
+      // X-AXIS: which Reltio attribute identifies each run on the x-axis.
+      xAxisAttribute: 'RUN_ID',
+
+      // Y-AXIS: one entry per bar series you want plotted. Each needs the
+      // exact Reltio attribute name, a display label, and a bar color.
+      // Add, remove, or edit entries here to change what shows up —
+      // nothing else in the code needs to change.
+      yAxisSeries: [
+        { attribute: 'TOTAL_SUBMITTED', label: 'Submitted', color: '#4B7BE5' }, // blue
+        { attribute: 'BATCHES_SENT',    label: 'Batches Sent', color: '#F5A623' }, // orange
+        { attribute: 'TOTAL_ACCEPTED',  label: 'Accepted',  color: '#3CB878' }, // green
+        { attribute: 'TOTAL_REJECTED',  label: 'Rejected',  color: '#E5534B' }  // red
+      ]
+    };
+
+    // -----------------------------------------------------------------
+    // 2a. AUTH — mint an OAuth access token using client_id/client_secret
+    // -----------------------------------------------------------------
+    let cachedToken = null;
+    let cachedTokenExpiresAt = 0;
+
+    async function getAccessToken() {
+      const now = Date.now();
+
+      // Reuse the cached token if it's not close to expiring, so we don't
+      // mint a new one on every chart refresh.
+      if (cachedToken && now < cachedTokenExpiresAt) {
+        return cachedToken;
+      }
+
+      const basicAuth = btoa(`${CONFIG.clientId}:${CONFIG.clientSecret}`);
+
+      const response = await fetch(CONFIG.authUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${basicAuth}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials'
+      });
+
+      if (!response.ok) {
+        throw new Error(`Reltio Auth returned ${response.status}`);
+      }
+
+      const tokenResponse = await response.json();
+      cachedToken = tokenResponse.access_token;
+      // Refresh 5 minutes before actual expiry to be safe
+      const expiresInMs = (tokenResponse.expires_in || 3600) * 1000;
+      cachedTokenExpiresAt = now + expiresInMs - (5 * 60 * 1000);
+
+      return cachedToken;
+    }
+
+    // -----------------------------------------------------------------
+    // 2b. FETCH — call the Reltio Search API using the minted token
+    // -----------------------------------------------------------------
+    async function fetchRunSummaries() {
+      const token = await getAccessToken();
+
+      const url =
+        `https://${CONFIG.reltioEnvironment}.reltio.com/reltio/api/${CONFIG.reltioTenantId}` +
+        `/entities/_search?` +
+        `filter=equals(type,'${CONFIG.entityType}')` +
+        `&sort=attributes.${CONFIG.xAxisAttribute}` +
+        `&order=desc` +
+        `&max=${CONFIG.maxRuns}`;
+
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Reltio Search API returned ${response.status}`);
+      }
+
+      return response.json();
+    }
+
+    // -----------------------------------------------------------------
+    // 3. TRANSFORM — build x-axis labels and y-axis series from CONFIG
+    // -----------------------------------------------------------------
+    function getAttrValue(entity, attrName) {
+      const attr = entity.attributes && entity.attributes[attrName];
+      if (!attr || !attr.length || attr[0].value === null || attr[0].value === undefined) {
+        return 0;
+      }
+      const num = Number(attr[0].value);
+      return Number.isNaN(num) ? 0 : num;
+    }
+
+    function transformEntitiesToChartData(entities) {
+      // Reverse so oldest-to-newest reads left-to-right on the chart
+      const sorted = [...entities].reverse();
+
+      const labels = sorted.map(e => {
+        const idAttr = e.attributes && e.attributes[CONFIG.xAxisAttribute];
+        const rawValue = idAttr && idAttr[0] ? idAttr[0].value : e.uri;
+        // Show the full, exact attribute value as-is on the x-axis.
+        return rawValue || '?';
+      });
+
+      // Build one data array per configured y-axis series, in order.
+      const series = CONFIG.yAxisSeries.map(seriesDef => ({
+        label: seriesDef.label,
+        color: seriesDef.color,
+        data: sorted.map(e => getAttrValue(e, seriesDef.attribute))
+      }));
+
+      return { labels, series };
+    }
+
+    // -----------------------------------------------------------------
+    // 4. RENDER — grouped bar chart, one colored series per metric
+    // -----------------------------------------------------------------
+    let chartInstance = null;
+
+    function renderChart(data) {
+      const canvas = document.getElementById('runSummaryChart');
+
+      // Give each run its own minimum width so full-length RUN_ID labels
+      // have room to render without being clipped, and let the container
+      // scroll horizontally once there are too many to fit on screen.
+      const pxPerRun = 90;
+      const minWidth = Math.max(data.labels.length * pxPerRun, 600);
+      document.getElementById('chartInner').style.width = minWidth + 'px';
+
+      const chartConfig = {
+        type: 'bar',
+        data: {
+          labels: data.labels,
+          datasets: data.series.map(s => ({
+            label: s.label,
+            data: s.data,
+            backgroundColor: s.color
+          }))
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            // Extra left/right padding so the first and last bars' angled
+            // labels don't run off the edge of the canvas.
+            padding: { left: 20, right: 20, bottom: 10 }
+          },
+          plugins: {
+            legend: { display: true, position: 'top' },
+            title: { display: true, text: 'Ingestion runs by ' + CONFIG.xAxisAttribute }
+          },
+          scales: {
+            x: {
+              stacked: false,
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,
+                minRotation: 45
+              }
+            },
+            y: { beginAtZero: true, stacked: false }
+          }
+        }
+      };
+
+      if (chartInstance) {
+        chartInstance.data = chartConfig.data;
+        chartInstance.options.plugins.title.text = chartConfig.options.plugins.title.text;
+        chartInstance.update();
+      } else {
+        chartInstance = new Chart(canvas, chartConfig);
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 5. MAIN
+    // -----------------------------------------------------------------
+    function setStatus(message, isError = false) {
+      const el = document.getElementById('status');
+      el.textContent = message;
+      el.style.display = message ? 'block' : 'none';
+      el.style.color = isError ? '#c0392b' : '#666';
+    }
+
+    async function loadAndRender() {
+      try {
+        setStatus('Loading run summaries…');
+        const entities = await fetchRunSummaries();
+
+        if (!Array.isArray(entities) || entities.length === 0) {
+          setStatus('No RunSummary entities found yet.');
+          return;
+        }
+
+        const chartData = transformEntitiesToChartData(entities);
+        setStatus('');
+        renderChart(chartData);
+      } catch (err) {
+        setStatus('Failed to load run summaries: ' + err.message, true);
+        console.error('[run-summary-chart]', err);
+      }
+    }
+
+    loadAndRender();
+    // Refresh every 5 minutes while the dashboard tile is open
+    setInterval(loadAndRender, 5 * 60 * 1000);
+  </script>
+</body>
+</html>
