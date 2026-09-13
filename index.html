@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Run Summary Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: transparent; }
+    #status { padding: 8px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div id="status">Loading run summaries…</div>
+  <div id="chartScroll" style="overflow-x: auto; width: 100%;">
+    <div id="chartInner" style="position: relative; height: 420px;">
+      <canvas id="runSummaryChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // -----------------------------------------------------------------
+    // 1. CONFIGURATION
+    // -----------------------------------------------------------------
+    const CONFIG = {
+      // Same-origin static file written by the GitHub Actions workflow.
+      // No auth, no CORS, no external service -- just a normal file
+      // fetch, same as loading an image or a stylesheet.
+      dataFileUrl: 'data/run-summaries.json',
+
+      // X-AXIS: which Reltio attribute identifies each run on the x-axis.
+      xAxisAttribute: 'RUN_ID',
+
+      // Y-AXIS: one entry per bar series you want plotted.
+      yAxisSeries: [
+        { attribute: 'TOTAL_SUBMITTED', label: 'Submitted', color: '#4B7BE5' }, // blue
+        { attribute: 'BATCHES_SENT',    label: 'Batches Sent', color: '#F5A623' }, // orange
+        { attribute: 'TOTAL_ACCEPTED',  label: 'Accepted',  color: '#3CB878' }, // green
+        { attribute: 'TOTAL_REJECTED',  label: 'Rejected',  color: '#E5534B' }  // red
+      ]
+    };
+
+    // -----------------------------------------------------------------
+    // 2. FETCH — read the static JSON file GitHub Actions keeps updated
+    // -----------------------------------------------------------------
+    async function fetchRunSummaries() {
+      // Cache-bust so the browser doesn't serve a stale cached copy
+      // between Actions runs.
+      const response = await fetch(`${CONFIG.dataFileUrl}?_=${Date.now()}`);
+
+      if (!response.ok) {
+        throw new Error(`Could not load ${CONFIG.dataFileUrl} (${response.status})`);
+      }
+
+      return response.json();
+    }
+
+    // -----------------------------------------------------------------
+    // 3. TRANSFORM
+    // -----------------------------------------------------------------
+    function getAttrValue(entity, attrName) {
+      const attr = entity.attributes && entity.attributes[attrName];
+      if (!attr || !attr.length || attr[0].value === null || attr[0].value === undefined) {
+        return 0;
+      }
+      const num = Number(attr[0].value);
+      return Number.isNaN(num) ? 0 : num;
+    }
+
+    function transformEntitiesToChartData(entities) {
+      const sorted = [...entities].reverse();
+
+      const labels = sorted.map(e => {
+        const idAttr = e.attributes && e.attributes[CONFIG.xAxisAttribute];
+        const rawValue = idAttr && idAttr[0] ? idAttr[0].value : e.uri;
+        return rawValue || '?';
+      });
+
+      const series = CONFIG.yAxisSeries.map(seriesDef => ({
+        label: seriesDef.label,
+        color: seriesDef.color,
+        data: sorted.map(e => getAttrValue(e, seriesDef.attribute))
+      }));
+
+      return { labels, series };
+    }
+
+    // -----------------------------------------------------------------
+    // 4. RENDER
+    // -----------------------------------------------------------------
+    let chartInstance = null;
+
+    function renderChart(data) {
+      const canvas = document.getElementById('runSummaryChart');
+
+      const pxPerRun = 90;
+      const minWidth = Math.max(data.labels.length * pxPerRun, 600);
+      document.getElementById('chartInner').style.width = minWidth + 'px';
+
+      const chartConfig = {
+        type: 'bar',
+        data: {
+          labels: data.labels,
+          datasets: data.series.map(s => ({
+            label: s.label,
+            data: s.data,
+            backgroundColor: s.color
+          }))
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { left: 20, right: 20, bottom: 10 }
+          },
+          plugins: {
+            legend: { display: true, position: 'top' },
+            title: { display: true, text: 'Ingestion runs by ' + CONFIG.xAxisAttribute }
+          },
+          scales: {
+            x: {
+              stacked: false,
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,
+                minRotation: 45
+              }
+            },
+            y: { beginAtZero: true, stacked: false }
+          }
+        }
+      };
+
+      if (chartInstance) {
+        chartInstance.data = chartConfig.data;
+        chartInstance.options.plugins.title.text = chartConfig.options.plugins.title.text;
+        chartInstance.update();
+      } else {
+        chartInstance = new Chart(canvas, chartConfig);
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 5. MAIN
+    // -----------------------------------------------------------------
+    function setStatus(message, isError = false) {
+      const el = document.getElementById('status');
+      el.textContent = message;
+      el.style.display = message ? 'block' : 'none';
+      el.style.color = isError ? '#c0392b' : '#666';
+    }
+
+    async function loadAndRender() {
+      try {
+        setStatus('Loading run summaries…');
+        const entities = await fetchRunSummaries();
+
+        if (!Array.isArray(entities) || entities.length === 0) {
+          setStatus('No RunSummary entities found yet.');
+          return;
+        }
+
+        const chartData = transformEntitiesToChartData(entities);
+        setStatus('');
+        renderChart(chartData);
+      } catch (err) {
+        setStatus('Failed to load run summaries: ' + err.message, true);
+        console.error('[run-summary-chart]', err);
+      }
+    }
+
+    loadAndRender();
+    // Refresh every 5 minutes -- picks up whatever GitHub Actions last wrote
+    setInterval(loadAndRender, 5 * 60 * 1000);
+  </script>
+</body>
+</html>
