@@ -4,6 +4,544 @@
     "attributes": {
       "RUN_ID": [
         {
+          "value": "RUN_20260914_084816_7decc7ac"
+        }
+      ],
+      "STATUS": [
+        {
+          "value": "success"
+        }
+      ],
+      "TOTAL_SUBMITTED": [
+        {
+          "value": "12"
+        }
+      ],
+      "TOTAL_ACCEPTED": [
+        {
+          "value": "12"
+        }
+      ],
+      "TOTAL_REJECTED": [
+        {
+          "value": "0"
+        }
+      ],
+      "BATCHES_SENT": [
+        {
+          "value": "2"
+        }
+      ],
+      "ACCEPTED_ENTITY_COUNT": [
+        {
+          "value": "12"
+        }
+      ],
+      "STARTED_AT": [
+        {
+          "value": "2026-09-14T08:48:16.656856+00:00"
+        }
+      ],
+      "COMPLETED_AT": [
+        {
+          "value": "2026-09-14T08:51:57.535671+00:00"
+        }
+      ],
+      "GBQ_SYNC": [
+        {
+          "value": {
+            "STATUS": [
+              {
+                "value": "success"
+              }
+            ],
+            "EXPECTED_COUNT": [
+              {
+                "value": "9"
+              }
+            ],
+            "FOUND_COUNT": [
+              {
+                "value": "9"
+              }
+            ],
+            "MISSING_COUNT": [
+              {
+                "value": "0"
+              }
+            ],
+            "MERGED_COUNT": [
+              {
+                "value": "0"
+              }
+            ]
+          }
+        }
+      ],
+      "AUDIT_EVENT_COUNT": [
+        {
+          "value": "15"
+        }
+      ]
+    },
+    "run_id": "RUN_20260914_084816_7decc7ac",
+    "audit_events": [
+      {
+        "audit_id": "cc62e4a6-4510-407c-84e2-4516339db952",
+        "batch_index": null,
+        "event": "env_vars_validated",
+        "timestamp": "2026-09-14T08:48:16.656856+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
+      },
+      {
+        "audit_id": "c0d81dca-d7cd-411c-a92e-0f324c5f077b",
+        "batch_index": null,
+        "event": "bq_query_start",
+        "timestamp": "2026-09-14T08:48:18.400888+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
+      },
+      {
+        "audit_id": "a5893178-a736-448a-98d0-c2540eba79aa",
+        "batch_index": 1,
+        "event": "request_sent",
+        "timestamp": "2026-09-14T08:48:22.516495+00:00",
+        "response_status": null,
+        "entity_count": 10,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "8e8033d0-7d11-4e3e-a200-c0bfce6ef664",
+        "batch_index": null,
+        "event": "token_minted",
+        "timestamp": "2026-09-14T08:48:24.263687+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Fresh token minted; reason=cache_empty; expires_in_seconds=3598; effective_ttl_seconds=3298"
+      },
+      {
+        "audit_id": "c0c8a586-1250-4160-900f-ba966476a39f",
+        "batch_index": 1,
+        "event": "response_received",
+        "timestamp": "2026-09-14T08:48:27.824591+00:00",
+        "response_status": 200,
+        "entity_count": null,
+        "accepted_count": 10,
+        "rejected_count": 0,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "24dcaf61-b92f-4fb4-b644-c376855d9344",
+        "batch_index": 1,
+        "event": "gbq_sync_verify_start",
+        "timestamp": "2026-09-14T08:48:28.317878+00:00",
+        "response_status": null,
+        "entity_count": 7,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "batch=1; table=prime-practice-493910.prime_modak.entities; expected=7; initial_delay_s=30.0; max_attempts=12; submission_time_merged_count=3"
+      },
+      {
+        "audit_id": "3216b8a0-bb8c-48af-8738-506ee14b9f2f",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:50:03.276623+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3198"
+      },
+      {
+        "audit_id": "5dfd9c59-196a-49b2-ad6f-05d8764a7c43",
+        "batch_index": 1,
+        "event": "gbq_sync_verify_complete",
+        "timestamp": "2026-09-14T08:50:13.197333+00:00",
+        "response_status": null,
+        "entity_count": 7,
+        "accepted_count": 7,
+        "rejected_count": 0,
+        "error": null,
+        "detail": "batch 1: All 7 entity IDs accounted for in prime-practice-493910.prime_modak.entities after 1 attempt(s) (7 found in GBQ; 3 submission-time merged)"
+      },
+      {
+        "audit_id": "001808e5-9ee2-4a3d-9fe3-b368fb784fb5",
+        "batch_index": null,
+        "event": "bq_rows_read",
+        "timestamp": "2026-09-14T08:50:13.630955+00:00",
+        "response_status": null,
+        "entity_count": 12,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
+      },
+      {
+        "audit_id": "c2e575c4-a3f6-47b7-ad88-6c73b8ad5c25",
+        "batch_index": 2,
+        "event": "request_sent",
+        "timestamp": "2026-09-14T08:50:14.205163+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "45a72836-245a-4e20-818f-54548591de51",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:50:14.624725+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3186"
+      },
+      {
+        "audit_id": "71688e63-9383-4d0e-8e8b-c74a7850c76e",
+        "batch_index": 2,
+        "event": "response_received",
+        "timestamp": "2026-09-14T08:50:18.530955+00:00",
+        "response_status": 200,
+        "entity_count": null,
+        "accepted_count": 2,
+        "rejected_count": 0,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "57113fd1-7a0e-41d4-b9b7-35081b74250e",
+        "batch_index": 2,
+        "event": "gbq_sync_verify_start",
+        "timestamp": "2026-09-14T08:50:19.142785+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "batch=2; table=prime-practice-493910.prime_modak.entities; expected=2; initial_delay_s=30.0; max_attempts=12; submission_time_merged_count=0"
+      },
+      {
+        "audit_id": "df797328-a822-4bdb-aea3-85626596a313",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:51:54.366522+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3087"
+      },
+      {
+        "audit_id": "9e7e4a4d-2dbc-4be1-a6cf-9cb7d5596023",
+        "batch_index": 2,
+        "event": "gbq_sync_verify_complete",
+        "timestamp": "2026-09-14T08:51:57.535671+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": 2,
+        "rejected_count": 0,
+        "error": null,
+        "detail": "batch 2: All 2 entity IDs accounted for in prime-practice-493910.prime_modak.entities after 1 attempt(s) (2 found in GBQ)"
+      }
+    ]
+  },
+  {
+    "type": "configuration/entityTypes/RunSummary",
+    "attributes": {
+      "RUN_ID": [
+        {
+          "value": "RUN_20260914_084435_fd4ac7f2"
+        }
+      ],
+      "STATUS": [
+        {
+          "value": "success"
+        }
+      ],
+      "TOTAL_SUBMITTED": [
+        {
+          "value": "12"
+        }
+      ],
+      "TOTAL_ACCEPTED": [
+        {
+          "value": "12"
+        }
+      ],
+      "TOTAL_REJECTED": [
+        {
+          "value": "0"
+        }
+      ],
+      "BATCHES_SENT": [
+        {
+          "value": "2"
+        }
+      ],
+      "ACCEPTED_ENTITY_COUNT": [
+        {
+          "value": "12"
+        }
+      ],
+      "STARTED_AT": [
+        {
+          "value": "2026-09-14T08:44:35.121523+00:00"
+        }
+      ],
+      "COMPLETED_AT": [
+        {
+          "value": "2026-09-14T08:48:14.134762+00:00"
+        }
+      ],
+      "GBQ_SYNC": [
+        {
+          "value": {
+            "STATUS": [
+              {
+                "value": "success"
+              }
+            ],
+            "EXPECTED_COUNT": [
+              {
+                "value": "9"
+              }
+            ],
+            "FOUND_COUNT": [
+              {
+                "value": "9"
+              }
+            ],
+            "MISSING_COUNT": [
+              {
+                "value": "0"
+              }
+            ],
+            "MERGED_COUNT": [
+              {
+                "value": "0"
+              }
+            ]
+          }
+        }
+      ],
+      "AUDIT_EVENT_COUNT": [
+        {
+          "value": "15"
+        }
+      ]
+    },
+    "run_id": "RUN_20260914_084435_fd4ac7f2",
+    "audit_events": [
+      {
+        "audit_id": "f4b5780c-6a74-4c78-a4b1-21eecb55755c",
+        "batch_index": null,
+        "event": "env_vars_validated",
+        "timestamp": "2026-09-14T08:44:35.121523+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
+      },
+      {
+        "audit_id": "2e75a331-9a71-46a5-9778-45ae791735fa",
+        "batch_index": null,
+        "event": "bq_query_start",
+        "timestamp": "2026-09-14T08:44:37.060822+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
+      },
+      {
+        "audit_id": "ebf61cca-15db-4b56-b0bd-aaa777db7520",
+        "batch_index": 1,
+        "event": "request_sent",
+        "timestamp": "2026-09-14T08:44:40.038539+00:00",
+        "response_status": null,
+        "entity_count": 10,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "63c97763-b96b-49c2-ba68-c5f061d1f004",
+        "batch_index": null,
+        "event": "token_minted",
+        "timestamp": "2026-09-14T08:44:41.434514+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Fresh token minted; reason=cache_empty; expires_in_seconds=3598; effective_ttl_seconds=3298"
+      },
+      {
+        "audit_id": "c000091d-f33b-4570-b0be-f3c888769e76",
+        "batch_index": 1,
+        "event": "response_received",
+        "timestamp": "2026-09-14T08:44:44.795868+00:00",
+        "response_status": 200,
+        "entity_count": null,
+        "accepted_count": 10,
+        "rejected_count": 0,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "d0a0faa6-bf13-4c44-8d38-4e0920bbe325",
+        "batch_index": 1,
+        "event": "gbq_sync_verify_start",
+        "timestamp": "2026-09-14T08:44:45.205342+00:00",
+        "response_status": null,
+        "entity_count": 7,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "batch=1; table=prime-practice-493910.prime_modak.entities; expected=7; initial_delay_s=30.0; max_attempts=12; submission_time_merged_count=3"
+      },
+      {
+        "audit_id": "9faf8975-866c-40af-9ae8-c0e4412b8881",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:46:19.744566+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3199"
+      },
+      {
+        "audit_id": "de5ddc58-da6a-4357-8f4c-803cde445799",
+        "batch_index": 1,
+        "event": "gbq_sync_verify_complete",
+        "timestamp": "2026-09-14T08:46:30.498606+00:00",
+        "response_status": null,
+        "entity_count": 7,
+        "accepted_count": 7,
+        "rejected_count": 0,
+        "error": null,
+        "detail": "batch 1: All 7 entity IDs accounted for in prime-practice-493910.prime_modak.entities after 1 attempt(s) (7 found in GBQ; 3 submission-time merged)"
+      },
+      {
+        "audit_id": "d5570abf-7546-4e03-abb8-f1f281861f3b",
+        "batch_index": null,
+        "event": "bq_rows_read",
+        "timestamp": "2026-09-14T08:46:30.893045+00:00",
+        "response_status": null,
+        "entity_count": 12,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
+      },
+      {
+        "audit_id": "74cc5fbf-2925-4195-bf48-3029c8c9924c",
+        "batch_index": 2,
+        "event": "request_sent",
+        "timestamp": "2026-09-14T08:46:31.304856+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "8377c613-2b30-45d0-870f-8895ff3d9478",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:46:31.652648+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3187"
+      },
+      {
+        "audit_id": "95450449-0e03-4f65-8906-b1fd9e58cea8",
+        "batch_index": 2,
+        "event": "response_received",
+        "timestamp": "2026-09-14T08:46:35.101594+00:00",
+        "response_status": 200,
+        "entity_count": null,
+        "accepted_count": 2,
+        "rejected_count": 0,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "83c457ba-765e-4015-93af-c435dec31d99",
+        "batch_index": 2,
+        "event": "gbq_sync_verify_start",
+        "timestamp": "2026-09-14T08:46:35.503647+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "batch=2; table=prime-practice-493910.prime_modak.entities; expected=2; initial_delay_s=30.0; max_attempts=12; submission_time_merged_count=0"
+      },
+      {
+        "audit_id": "d84855ba-63aa-4897-921d-5a506b412e54",
+        "batch_index": null,
+        "event": "token_accessed",
+        "timestamp": "2026-09-14T08:48:10.958560+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Reused cached token; expires_in_seconds=3087"
+      },
+      {
+        "audit_id": "0194ab0d-5eb3-4d2f-a1f6-ded719203323",
+        "batch_index": 2,
+        "event": "gbq_sync_verify_complete",
+        "timestamp": "2026-09-14T08:48:14.134762+00:00",
+        "response_status": null,
+        "entity_count": 2,
+        "accepted_count": 2,
+        "rejected_count": 0,
+        "error": null,
+        "detail": "batch 2: All 2 entity IDs accounted for in prime-practice-493910.prime_modak.entities after 1 attempt(s) (2 found in GBQ)"
+      }
+    ]
+  },
+  {
+    "type": "configuration/entityTypes/RunSummary",
+    "attributes": {
+      "RUN_ID": [
+        {
           "value": "RUN_20260914_072153_13679263"
         }
       ],
