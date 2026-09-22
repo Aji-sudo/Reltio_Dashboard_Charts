@@ -4,7 +4,7 @@
     "attributes": {
       "RUN_ID": [
         {
-          "value": "RUN_20260921_171522_e6deb523"
+          "value": "RUN_20260922_080246_930ab34c"
         }
       ],
       "STATUS": [
@@ -39,12 +39,12 @@
       ],
       "STARTED_AT": [
         {
-          "value": "2026-09-21T17:15:22.411085+00:00"
+          "value": "2026-09-22T08:02:46.903956+00:00"
         }
       ],
       "COMPLETED_AT": [
         {
-          "value": "2026-09-21T17:15:41.737620+00:00"
+          "value": "2026-09-22T08:02:51.868996+00:00"
         }
       ],
       "GBQ_SYNC": [
@@ -84,13 +84,13 @@
         }
       ]
     },
-    "run_id": "RUN_20260921_171522_e6deb523",
+    "run_id": "RUN_20260922_080246_930ab34c",
     "audit_events": [
       {
-        "audit_id": "66c55326-5741-40ea-a97b-34de045232ce",
+        "audit_id": "87d7a71d-3001-4507-aa3e-575ffcdbc8e5",
         "batch_index": null,
         "event": "env_vars_validated",
-        "timestamp": "2026-09-21T17:15:22.411085+00:00",
+        "timestamp": "2026-09-22T08:02:46.903956+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -99,10 +99,10 @@
         "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
       },
       {
-        "audit_id": "e9146c5d-3644-4489-984e-c68c10135362",
+        "audit_id": "dfa18ef4-ec64-430a-a1f3-d519027a058b",
         "batch_index": null,
         "event": "bq_query_start",
-        "timestamp": "2026-09-21T17:15:35.784715+00:00",
+        "timestamp": "2026-09-22T08:02:48.497638+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -111,10 +111,10 @@
         "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
       },
       {
-        "audit_id": "4fadef5e-6611-486d-a3ca-5f284bcaa636",
+        "audit_id": "6e9e5bfe-460f-487b-90a2-b9803fc127df",
         "batch_index": null,
         "event": "bq_rows_read",
-        "timestamp": "2026-09-21T17:15:41.374979+00:00",
+        "timestamp": "2026-09-22T08:02:51.486707+00:00",
         "response_status": null,
         "entity_count": 14,
         "accepted_count": null,
@@ -123,10 +123,10 @@
         "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
       },
       {
-        "audit_id": "03a5d9d4-7fea-4198-b4df-562a223845e4",
+        "audit_id": "f67e28b9-d701-4ecb-89f8-cb6521f60496",
         "batch_index": 1,
         "event": "request_sent",
-        "timestamp": "2026-09-21T17:15:41.737620+00:00",
+        "timestamp": "2026-09-22T08:02:51.868996+00:00",
         "response_status": null,
         "entity_count": 13,
         "accepted_count": null,
@@ -141,7 +141,7 @@
     "attributes": {
       "RUN_ID": [
         {
-          "value": "RUN_20260921_171452_db979710"
+          "value": "RUN_20260922_080125_f13eb1c7"
         }
       ],
       "STATUS": [
@@ -176,12 +176,12 @@
       ],
       "STARTED_AT": [
         {
-          "value": "2026-09-21T17:14:52.091148+00:00"
+          "value": "2026-09-22T08:01:25.327475+00:00"
         }
       ],
       "COMPLETED_AT": [
         {
-          "value": "2026-09-21T17:15:00.639081+00:00"
+          "value": "2026-09-22T08:01:31.703239+00:00"
         }
       ],
       "GBQ_SYNC": [
@@ -221,13 +221,13 @@
         }
       ]
     },
-    "run_id": "RUN_20260921_171452_db979710",
+    "run_id": "RUN_20260922_080125_f13eb1c7",
     "audit_events": [
       {
-        "audit_id": "ad19d141-4a74-429c-8bb6-8c2fe6ddcd7f",
+        "audit_id": "a2dacd0e-ccd1-42c5-b4b8-92762944ba37",
         "batch_index": null,
         "event": "env_vars_validated",
-        "timestamp": "2026-09-21T17:14:52.091148+00:00",
+        "timestamp": "2026-09-22T08:01:25.327475+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -236,10 +236,10 @@
         "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
       },
       {
-        "audit_id": "0710d718-2271-47d4-9f06-228c008234f4",
+        "audit_id": "02d0e7a5-13fb-4300-ac1e-a535e6db8a16",
         "batch_index": null,
         "event": "bq_query_start",
-        "timestamp": "2026-09-21T17:14:54.469591+00:00",
+        "timestamp": "2026-09-22T08:01:27.112969+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -248,10 +248,10 @@
         "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
       },
       {
-        "audit_id": "7877dc98-fff0-469f-84be-6d954a93699a",
+        "audit_id": "34f2f2f4-7234-493c-bf92-b50c4b429104",
         "batch_index": null,
         "event": "bq_rows_read",
-        "timestamp": "2026-09-21T17:14:57.670050+00:00",
+        "timestamp": "2026-09-22T08:01:29.868951+00:00",
         "response_status": null,
         "entity_count": 14,
         "accepted_count": null,
@@ -260,10 +260,10 @@
         "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
       },
       {
-        "audit_id": "e743497e-9034-4b7c-97e0-183054bedcb7",
+        "audit_id": "20a12ecc-76da-4b89-a38c-64ced470cfb3",
         "batch_index": 1,
         "event": "request_sent",
-        "timestamp": "2026-09-21T17:14:58.383691+00:00",
+        "timestamp": "2026-09-22T08:01:30.323709+00:00",
         "response_status": null,
         "entity_count": 13,
         "accepted_count": null,
@@ -272,10 +272,10 @@
         "detail": null
       },
       {
-        "audit_id": "33a29e0a-b2e9-4625-8c2d-7f28f11520f8",
+        "audit_id": "f2edff03-7e80-4163-8d59-920d66361435",
         "batch_index": 1,
         "event": "request_failed",
-        "timestamp": "2026-09-21T17:15:00.639081+00:00",
+        "timestamp": "2026-09-22T08:01:31.703239+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -290,7 +290,7 @@
     "attributes": {
       "RUN_ID": [
         {
-          "value": "RUN_20260921_171415_5fcdf3b0"
+          "value": "RUN_20260922_075331_5686e56e"
         }
       ],
       "STATUS": [
@@ -325,12 +325,12 @@
       ],
       "STARTED_AT": [
         {
-          "value": "2026-09-21T17:14:15.332652+00:00"
+          "value": "2026-09-22T07:53:31.224750+00:00"
         }
       ],
       "COMPLETED_AT": [
         {
-          "value": "2026-09-21T17:14:22.390730+00:00"
+          "value": "2026-09-22T07:53:37.884086+00:00"
         }
       ],
       "GBQ_SYNC": [
@@ -370,13 +370,13 @@
         }
       ]
     },
-    "run_id": "RUN_20260921_171415_5fcdf3b0",
+    "run_id": "RUN_20260922_075331_5686e56e",
     "audit_events": [
       {
-        "audit_id": "cd7efacb-ebdd-4361-9229-06d802bdcc55",
+        "audit_id": "26cbd24a-1571-42b2-9387-7283ee7740dc",
         "batch_index": null,
         "event": "env_vars_validated",
-        "timestamp": "2026-09-21T17:14:15.332652+00:00",
+        "timestamp": "2026-09-22T07:53:31.224750+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -385,10 +385,10 @@
         "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
       },
       {
-        "audit_id": "42139330-b2c2-4112-87ee-c93846da0a64",
+        "audit_id": "fe7479c2-8013-49f7-a35d-a1c642e2263c",
         "batch_index": null,
         "event": "bq_query_start",
-        "timestamp": "2026-09-21T17:14:17.374618+00:00",
+        "timestamp": "2026-09-22T07:53:33.269288+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -397,10 +397,10 @@
         "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
       },
       {
-        "audit_id": "7fea3f7a-875f-4b28-8966-2b98bcd19062",
+        "audit_id": "0c57e18a-ccc8-4f00-9887-6ed8a71050e0",
         "batch_index": null,
         "event": "bq_rows_read",
-        "timestamp": "2026-09-21T17:14:20.318447+00:00",
+        "timestamp": "2026-09-22T07:53:36.459665+00:00",
         "response_status": null,
         "entity_count": 14,
         "accepted_count": null,
@@ -409,10 +409,10 @@
         "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
       },
       {
-        "audit_id": "d4371a78-e86b-4e41-98a0-8f92bb5336bb",
+        "audit_id": "f9b1f724-624c-4fb7-b5ac-4873d0c734c7",
         "batch_index": 1,
         "event": "request_sent",
-        "timestamp": "2026-09-21T17:14:20.702786+00:00",
+        "timestamp": "2026-09-22T07:53:36.865243+00:00",
         "response_status": null,
         "entity_count": 13,
         "accepted_count": null,
@@ -421,10 +421,10 @@
         "detail": null
       },
       {
-        "audit_id": "d863f0fc-73b4-44ed-91e7-2a7a3ac03aa3",
+        "audit_id": "c936b2f9-f1de-4b1f-94f4-32b84ec4fef2",
         "batch_index": 1,
         "event": "request_failed",
-        "timestamp": "2026-09-21T17:14:22.390730+00:00",
+        "timestamp": "2026-09-22T07:53:37.884086+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
