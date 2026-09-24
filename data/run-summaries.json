@@ -4,7 +4,7 @@
     "attributes": {
       "RUN_ID": [
         {
-          "value": "RUN_20260924_061921_98ae3688"
+          "value": "RUN_20260924_074053_79292a53"
         }
       ],
       "STATUS": [
@@ -14,17 +14,17 @@
       ],
       "TOTAL_SUBMITTED": [
         {
-          "value": "13"
+          "value": "10"
         }
       ],
       "TOTAL_ACCEPTED": [
         {
-          "value": "12"
+          "value": "0"
         }
       ],
       "TOTAL_REJECTED": [
         {
-          "value": "1"
+          "value": "10"
         }
       ],
       "BATCHES_SENT": [
@@ -34,17 +34,17 @@
       ],
       "ACCEPTED_ENTITY_COUNT": [
         {
-          "value": "12"
+          "value": "0"
         }
       ],
       "STARTED_AT": [
         {
-          "value": "2026-09-24T06:19:21.489040+00:00"
+          "value": "2026-09-24T07:40:53.417749+00:00"
         }
       ],
       "COMPLETED_AT": [
         {
-          "value": "2026-09-24T06:19:31.237393+00:00"
+          "value": "2026-09-24T07:41:02.482258+00:00"
         }
       ],
       "GBQ_SYNC": [
@@ -84,13 +84,13 @@
         }
       ]
     },
-    "run_id": "RUN_20260924_061921_98ae3688",
+    "run_id": "RUN_20260924_074053_79292a53",
     "audit_events": [
       {
-        "audit_id": "4291ad9e-fa0d-46c5-89a9-f956d07a7541",
+        "audit_id": "315f987d-ee76-43cb-bbf5-8410132af4ee",
         "batch_index": null,
         "event": "env_vars_validated",
-        "timestamp": "2026-09-24T06:19:21.489040+00:00",
+        "timestamp": "2026-09-24T07:40:53.417749+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -99,10 +99,10 @@
         "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
       },
       {
-        "audit_id": "69a3e72b-c964-44e9-af2c-bf876e9b8c0e",
+        "audit_id": "a41d9627-929d-4371-9ac7-d00d50753258",
         "batch_index": null,
         "event": "bq_query_start",
-        "timestamp": "2026-09-24T06:19:23.238985+00:00",
+        "timestamp": "2026-09-24T07:40:55.505838+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -111,34 +111,34 @@
         "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
       },
       {
-        "audit_id": "dbc9605c-ab96-464b-b33e-2c25fa866196",
+        "audit_id": "51d5cb5a-df66-4e13-9c0e-9782bd34db64",
         "batch_index": null,
         "event": "bq_rows_read",
-        "timestamp": "2026-09-24T06:19:26.315401+00:00",
+        "timestamp": "2026-09-24T07:40:58.168023+00:00",
         "response_status": null,
-        "entity_count": 14,
+        "entity_count": 10,
         "accepted_count": null,
         "rejected_count": null,
         "error": null,
         "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
       },
       {
-        "audit_id": "758263bf-6389-4cf0-b19a-cd22886bfcda",
+        "audit_id": "a6514005-6bbd-4a16-8723-99dd4a545227",
         "batch_index": 1,
         "event": "request_sent",
-        "timestamp": "2026-09-24T06:19:26.718170+00:00",
+        "timestamp": "2026-09-24T07:40:58.539198+00:00",
         "response_status": null,
-        "entity_count": 13,
+        "entity_count": 10,
         "accepted_count": null,
         "rejected_count": null,
         "error": null,
         "detail": null
       },
       {
-        "audit_id": "01ad6603-91d5-4219-8327-25efb7a11d5d",
+        "audit_id": "07f22d12-b11b-4873-9ff4-c8b426d792c1",
         "batch_index": null,
         "event": "token_minted",
-        "timestamp": "2026-09-24T06:19:27.962110+00:00",
+        "timestamp": "2026-09-24T07:40:59.696962+00:00",
         "response_status": null,
         "entity_count": null,
         "accepted_count": null,
@@ -147,15 +147,176 @@
         "detail": "Fresh token minted; reason=cache_empty; expires_in_seconds=3598; effective_ttl_seconds=3298"
       },
       {
-        "audit_id": "a35b4a39-5d93-4c97-9186-4247353a99a7",
+        "audit_id": "00197739-4776-495e-b04b-540551a75c70",
         "batch_index": 1,
         "event": "response_received",
-        "timestamp": "2026-09-24T06:19:31.237393+00:00",
+        "timestamp": "2026-09-24T07:41:02.482258+00:00",
         "response_status": 200,
         "entity_count": null,
-        "accepted_count": 12,
-        "rejected_count": 1,
-        "error": "[{\"cagm\": \"CAGM7861\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}]",
+        "accepted_count": 0,
+        "rejected_count": 10,
+        "error": "[{\"cagm\": \"CAGM90009\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90001\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90005\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90003\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90007\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90004\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90008\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90002\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90006\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90010\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}]",
+        "detail": null
+      }
+    ]
+  },
+  {
+    "type": "configuration/entityTypes/RunSummary",
+    "attributes": {
+      "RUN_ID": [
+        {
+          "value": "RUN_20260924_072018_fdda1fc1"
+        }
+      ],
+      "STATUS": [
+        {
+          "value": "partial_success"
+        }
+      ],
+      "TOTAL_SUBMITTED": [
+        {
+          "value": "10"
+        }
+      ],
+      "TOTAL_ACCEPTED": [
+        {
+          "value": "0"
+        }
+      ],
+      "TOTAL_REJECTED": [
+        {
+          "value": "10"
+        }
+      ],
+      "BATCHES_SENT": [
+        {
+          "value": "1"
+        }
+      ],
+      "ACCEPTED_ENTITY_COUNT": [
+        {
+          "value": "0"
+        }
+      ],
+      "STARTED_AT": [
+        {
+          "value": "2026-09-24T07:20:18.295981+00:00"
+        }
+      ],
+      "COMPLETED_AT": [
+        {
+          "value": "2026-09-24T07:20:26.772635+00:00"
+        }
+      ],
+      "GBQ_SYNC": [
+        {
+          "value": {
+            "STATUS": [
+              {
+                "value": "skipped"
+              }
+            ],
+            "EXPECTED_COUNT": [
+              {
+                "value": "0"
+              }
+            ],
+            "FOUND_COUNT": [
+              {
+                "value": "0"
+              }
+            ],
+            "MISSING_COUNT": [
+              {
+                "value": "0"
+              }
+            ],
+            "MERGED_COUNT": [
+              {
+                "value": "0"
+              }
+            ]
+          }
+        }
+      ],
+      "AUDIT_EVENT_COUNT": [
+        {
+          "value": "6"
+        }
+      ]
+    },
+    "run_id": "RUN_20260924_072018_fdda1fc1",
+    "audit_events": [
+      {
+        "audit_id": "03c68ec8-9db6-498f-be8e-63aa73dcd8df",
+        "batch_index": null,
+        "event": "env_vars_validated",
+        "timestamp": "2026-09-24T07:20:18.295981+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "All 6 required environment variables present: PROJECT_ID, BQ_DATASET, BQ_MEMBER_TABLE, RELTIO_ENVIRONMENT, RELTIO_TENANT_ID, RELTIO_CLIENT_SECRET_NAME"
+      },
+      {
+        "audit_id": "adbecefa-53f9-4281-9109-5e587ab0a07a",
+        "batch_index": null,
+        "event": "bq_query_start",
+        "timestamp": "2026-09-24T07:20:19.956160+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "project=prime-practice-493910 dataset=prime_test table=source_table page_size=1000"
+      },
+      {
+        "audit_id": "b8b95743-5fc6-4fb2-a3cb-b84fa8dd706e",
+        "batch_index": null,
+        "event": "bq_rows_read",
+        "timestamp": "2026-09-24T07:20:23.021040+00:00",
+        "response_status": null,
+        "entity_count": 10,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "BigQuery row streaming complete for prime-practice-493910.prime_test.source_table"
+      },
+      {
+        "audit_id": "61853508-1b27-41c8-bc95-563b1b8b14e0",
+        "batch_index": 1,
+        "event": "request_sent",
+        "timestamp": "2026-09-24T07:20:23.412647+00:00",
+        "response_status": null,
+        "entity_count": 10,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": null
+      },
+      {
+        "audit_id": "c0641211-6b7c-4c3f-a328-42c90e309eae",
+        "batch_index": null,
+        "event": "token_minted",
+        "timestamp": "2026-09-24T07:20:24.697212+00:00",
+        "response_status": null,
+        "entity_count": null,
+        "accepted_count": null,
+        "rejected_count": null,
+        "error": null,
+        "detail": "Fresh token minted; reason=cache_empty; expires_in_seconds=3598; effective_ttl_seconds=3298"
+      },
+      {
+        "audit_id": "970425f4-bcb1-434a-983f-69ad0041c15e",
+        "batch_index": 1,
+        "event": "response_received",
+        "timestamp": "2026-09-24T07:20:26.772635+00:00",
+        "response_status": 200,
+        "entity_count": null,
+        "accepted_count": 0,
+        "rejected_count": 10,
+        "error": "[{\"cagm\": \"CAGM90009\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90001\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90005\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90003\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90007\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90004\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90008\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90002\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90006\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}, {\"cagm\": \"CAGM90010\", \"error_message\": \"The profile has failed against one or more DVF Functions.\"}]",
         "detail": null
       }
     ]
